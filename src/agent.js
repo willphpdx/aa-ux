@@ -5,7 +5,7 @@ const encode = encodeURIComponent;
 const responseBody = res => res.body;
 
 const SEARCH_ROOT = 'https://tjjxmcchgd.execute-api.us-east-1.amazonaws.com/Prod'
-const ASSETS_ROOT = 'https://audaud.s3.amazonaws.com/articles'
+const ASSETS_ROOT = 'https://audaud.s3.amazonaws.com/images'
 
 const requests = {
   search: uri =>

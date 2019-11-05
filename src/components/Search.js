@@ -68,7 +68,6 @@ class Search extends React.Component {
 
   navigate = event => {
     const slug = event.target.id;
-    console.log("slig: ", slug)
     this.props.onArticleSelected(slug)
     Promise.all([agent.Articles.get(slug)])
     .then(res => this.props.onArticleLoaded(res[0].body))
@@ -91,7 +90,6 @@ class Search extends React.Component {
             label: 'Author',
             populateType: 'author',
             populateWith: ['Gary Lemco', 'Another author'],
-            selectedValue: this.props.author
           }
         } handleSelector={this.selectAuthor} />
 
