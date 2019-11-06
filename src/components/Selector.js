@@ -12,7 +12,7 @@ const Selector = props => {
             <FormControl variant='outlined' style={{width: '100%'}}>
                 <InputLabel>{props.data.label}</InputLabel>
                 <Select
-                    value={props.data.selectedValue}
+                    value={props.data.selectedValue || ""}
                     onChange={props.handleSelector}
                     inputProps={{ name: props.data.populateType }}
                 >
