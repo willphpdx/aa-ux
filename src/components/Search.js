@@ -49,6 +49,10 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class Search extends React.Component {
+  /**
+   * As mentioned in another comment, 
+   * strongly recommend using `componentDidMount` instead of `componentWillMount`
+   */
   componentWillMount() {
     this.props.onLoad()
   }
@@ -57,8 +61,11 @@ class Search extends React.Component {
     this.props.onUnload();
   }
 
-  constructor() {
-      super();
+  // It is ALWAYS important to pass the `props` 
+  // in both the constructor invocation and the super invocation:
+  // https://reactjs.org/docs/react-component.html#constructor
+  constructor(props) {
+      super(props);
       this.state = {
           author: '',
           articles: []

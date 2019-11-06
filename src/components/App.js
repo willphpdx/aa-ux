@@ -20,6 +20,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch({ type: REDIRECT })
 });
 
+// This can be a functional component if all you plan to return is the Router code.
 export default class App extends React.Component {
     render() {
       return (

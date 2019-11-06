@@ -1,3 +1,4 @@
+import produce from 'immer';
 import {
   ARTICLE_PAGE_LOADED,
   ARTICLE_PAGE_UNLOADED,
@@ -5,15 +6,18 @@ import {
   DELETE_COMMENT
 } from '../constants/actionTypes';
 
-export default (state = {}, action) => {
-  switch (action.type) {
-    case ARTICLE_PAGE_LOADED:
-      return {
-        ...state,
-      };
-    case ARTICLE_PAGE_UNLOADED:
-      return {};
-    default:
-      return state;
-  }
-};
+// Strongly recommend fleshing out the basic shape of this object for self-documenting code.
+const initialState = {};
+
+export default (state = initialState, action) => 
+  produce(state, draft => {
+    switch (action.type) {
+      case ARTICLE_PAGE_LOADED:
+        draft = state;
+        break;
+      case ARTICLE_PAGE_UNLOADED:
+        draft = { ...initialState };
+        break;
+      // no default
+    }
+  });

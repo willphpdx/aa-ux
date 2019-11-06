@@ -11,6 +11,8 @@ export const history = createHistory();
 // Build the middleware for intercepting and dispatching navigation actions
 const myRouterMiddleware = routerMiddleware(history);
 
+// I recommend using "redux-thunk" for async code inside redux actions.
+// It'll likely be more stable than a homegrown solution.
 const getMiddleware = () => {
   if (process.env.NODE_ENV === 'production') {
     return applyMiddleware(myRouterMiddleware, promiseMiddleware, localStorageMiddleware);
