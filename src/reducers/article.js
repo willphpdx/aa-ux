@@ -1,29 +1,21 @@
+import produce from 'immer';
 import {
   ARTICLE_PAGE_LOADED,
   ARTICLE_PAGE_UNLOADED,
-  ARTICLE_LOADED,
-  ARTICLE_LOAD_FAILED
 } from '../constants/actionTypes';
 
-export default (state = {}, action) => {
-  switch (action.type) {
-    case ARTICLE_PAGE_LOADED:
-      return {
-        ...state,
-      };
-    case ARTICLE_LOADED:
-      return {
-        ...state,
-        html: action.payload
-      };
-    case ARTICLE_LOAD_FAILED:
-      return {
-        ...state,
-        err: action.payload
-      };
-    case ARTICLE_PAGE_UNLOADED:
-      return {};
-    default:
-      return state;
-  }
-};
+// Strongly recommend fleshing out the basic shape of this object for self-documenting code.
+const initialState = {};
+
+export default (state = initialState, action) =>
+  produce(state, draft => {
+    switch (action.type) {
+      case ARTICLE_PAGE_LOADED:
+        draft = state;
+        break;
+      case ARTICLE_PAGE_UNLOADED:
+        draft = { ...initialState };
+        break;
+      // no default
+    }
+  });
