@@ -20,6 +20,12 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class Article extends React.Component {
+  /**
+   * `componentWillMount` is a depricated method.
+   * strongly recommend you use `componentDidMount`
+   * 
+   * https://reactjs.org/docs/react-component.html#unsafe_componentwillmount
+   */
   componentWillMount() {
     this.props.onLoad(Promise.all([
       agent.Articles.get(this.props.match.params.id),

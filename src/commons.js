@@ -65,5 +65,10 @@ const replacer = function( depth = Number.MAX_SAFE_INTEGER ) {
   };
 };
 
-module.exports.getQueryString = getQueryString;
-module.exports.replacer = replacer;
+/**
+ * Cleaner way of exporting code from cjs files.
+ */
+module.exports = {
+  getQueryString,
+  replacer,
+};

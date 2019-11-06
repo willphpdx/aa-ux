@@ -9,9 +9,13 @@ function fetchArticle() {
         fetch(url.href)
         .then(res => res.html())
         .then(res => {
-          res.error && throw(res.err)
-          dispatch(fetchArticleSuccess(res);
-          return res;
+            // 1. Previous syntax turned the return into unreachable code.
+            // 2. "res.error" and "res.err" are both values in this response or a typo?
+            if (res.error) {
+                throw res.err;
+            }   
+            dispatch(fetchArticleSuccess(res));
+            return res;
         })
         .catch(error => {
             dispatch(fetchArticleError(error));
