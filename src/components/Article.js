@@ -1,12 +1,14 @@
 import React from 'react';
-import { Container } from '@material-ui/core';
 import agent from '../agent';
 import { connect } from 'react-redux';
 import marked from 'marked';
 
-import { ARTICLE_PAGE_LOADED, ARTICLE_PAGE_UNLOADED } from '../constants/actionTypes';
-
-const parse = require('html-react-parser');
+import {
+  ARTICLE_PAGE_LOADED,
+  ARTICLE_PAGE_UNLOADED,
+  ARTICLE_LOADED,
+  ARTICLE_LOAD_FAILED,
+ } from '../constants/actionTypes';
 
 const mapStateToProps = state => ({
   ...state.article,
@@ -16,14 +18,19 @@ const mapDispatchToProps = dispatch => ({
   onLoad: payload =>
     dispatch({ type: ARTICLE_PAGE_LOADED, payload }),
   onUnload: () =>
-    dispatch({ type: ARTICLE_PAGE_UNLOADED })
+    dispatch({ type: ARTICLE_PAGE_UNLOADED }),
+  onArticleLoaded: payload =>
+    dispatch({ type: ARTICLE_LOADED, payload}),
+  onArticleLoadFailed: err =>
+    dispatch({ type: ARTICLE_LOAD_FAILED, err })
 });
 
 class Article extends React.Component {
-  componentWillMount() {
-    this.props.onLoad(Promise.all([
-      agent.Articles.get(this.props.match.params.id),
-    ]));
+  componentDidMount() {
+    const slug = this.props.match.params.id
+    Promise.all([agent.Articles.getHtml(slug)])
+    .then(res => this.props.onArticleLoaded(res[0].body))
+    .catch(err => this.props.onArticleLoadFailed(err));
   }
 
   componentWillUnmount() {

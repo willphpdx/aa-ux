@@ -26,6 +26,7 @@ export default (state = {}, action) => {
     case ARTICLE_SELECTED:
       return {
         ...state,
+        articleSelected: true,
         slug: action.payload
       };
     case ARTICLE_LOAD_FAILED:

@@ -21,9 +21,7 @@ class Nav extends React.Component {
       <div>
         {this.renderRedirect()}
         <ul>
-          <li>
-            <button onClick={this.onSearchClick}>Search</button>
-          </li>
+          AudAud
         </ul>
       </div>
     )

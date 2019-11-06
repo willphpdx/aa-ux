@@ -1,8 +1,8 @@
 import React from 'react';
 import Search from './Search';
 import Article from './Article';
-import Nav from './Nav';
 import { Route, Switch } from 'react-router-dom'
+import { connect } from 'react-redux';
 
 import { APP_LOAD, REDIRECT } from '../constants/actionTypes';
 
@@ -20,7 +20,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch({ type: REDIRECT })
 });
 
-export default class App extends React.Component {
+class App extends React.Component {
     render() {
       return (
         <Switch>
@@ -30,6 +30,4 @@ export default class App extends React.Component {
       )};
 }
 
-function Home() {
-  return <h2>Home</h2>;
-}
+export default connect(mapStateToProps, mapDispatchToProps)(App);

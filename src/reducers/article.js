@@ -1,8 +1,8 @@
 import {
   ARTICLE_PAGE_LOADED,
   ARTICLE_PAGE_UNLOADED,
-  ADD_COMMENT,
-  DELETE_COMMENT
+  ARTICLE_LOADED,
+  ARTICLE_LOAD_FAILED
 } from '../constants/actionTypes';
 
 export default (state = {}, action) => {
@@ -10,6 +10,16 @@ export default (state = {}, action) => {
     case ARTICLE_PAGE_LOADED:
       return {
         ...state,
+      };
+    case ARTICLE_LOADED:
+      return {
+        ...state,
+        html: action.payload
+      };
+    case ARTICLE_LOAD_FAILED:
+      return {
+        ...state,
+        err: action.payload
       };
     case ARTICLE_PAGE_UNLOADED:
       return {};

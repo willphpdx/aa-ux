@@ -5,13 +5,10 @@ import { GridList } from '@material-ui/core';
 import { GridListTile } from '@material-ui/core';
 import { GridListTileBar } from '@material-ui/core';
 import { ListSubheader } from '@material-ui/core';
-import { IconButton } from '@material-ui/core';
+import { Redirect } from 'react-router-dom'
 import Selector from './Selector';
-import { Redirect } from "react-router-dom";
 import agent from '../agent';
 import { connect } from 'react-redux';
-import marked from 'marked';
-import replacer from '../commons'
 
 import {
   SEARCH_PAGE_LOADED,
@@ -19,15 +16,12 @@ import {
   SEARCH_COMPLETE,
   SEARCH_ERROR,
   AUTHOR_SELECTED,
-  AUTHOR_LOAD_FAILED,
   ARTICLE_SELECTED,
   ARTICLE_LOAD_FAILED,
  } from '../constants/actionTypes';
 
 const mapStateToProps = state => ({
-  ...state,
-  articles: state.search.articles,
-  author: state.search.author
+  ...state.search,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -49,7 +43,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class Search extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     this.props.onLoad()
   }
 
@@ -69,9 +63,6 @@ class Search extends React.Component {
   navigate = event => {
     const slug = event.target.id;
     this.props.onArticleSelected(slug)
-    Promise.all([agent.Articles.get(slug)])
-    .then(res => this.props.onArticleLoaded(res[0].body))
-    .catch(err => this.props.onArticleLoadFailed(err));
   }
 
   selectAuthor = event => {
@@ -84,15 +75,21 @@ class Search extends React.Component {
   render() {
     return (
       <Container>
-        <Selector data = {
-          {
-            size: 6,
-            label: 'Author',
-            populateType: 'author',
-            populateWith: ['Gary Lemco', 'Another author'],
+        <Selector
+          data = {
+            {
+              size: 6,
+              label: 'Author',
+              populateWith: ['Gary Lemco', 'Another author'],
+              selectedValue: this.props.author
+            }
           }
-        } handleSelector={this.selectAuthor} />
-
+          handleSelector={this.selectAuthor}
+       />
+        {this.props.articleSelected ?
+          <Redirect to={'/article/'+this.props.slug} />
+          : <div/>
+        }
         {this.props.articles ?
           <GridList
             cellHeight={180}
