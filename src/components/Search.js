@@ -6,10 +6,9 @@ import { GridListTile } from '@material-ui/core';
 import { GridListTileBar } from '@material-ui/core';
 import { ListSubheader } from '@material-ui/core';
 import { Redirect } from 'react-router-dom'
-import Selector from './Selector';
+import AuthorInput from './AuthorInput';
 import agent from '../agent';
 import { connect } from 'react-redux';
-
 import {
   SEARCH_PAGE_LOADED,
   SEARCH_PAGE_UNLOADED,
@@ -69,7 +68,7 @@ class Search extends React.Component {
   }
 
   selectAuthor = event => {
-    this.props.onAuthorSelected(event.target.value)
+    this.props.onAuthorSelected(event.target.value);
     Promise.all([agent.Searches.byAuthor(event.target.value)])
     .then(res => this.props.onSearchComplete(res[0].Items))
     .catch(err => this.props.onSearchFailed(err));
@@ -78,17 +77,10 @@ class Search extends React.Component {
   render() {
     return (
       <Container>
-        <Selector
-          data = {
-            {
-              size: 6,
-              label: 'Author',
-              populateWith: ['Gary Lemco', 'Another author'],
-              selectedValue: this.props.author
-            }
-          }
-          handleSelector={this.selectAuthor}
-       />
+        <AuthorInput
+          handleSelection={this.selectAuthor}
+          authors={['Gary Lemco', 'Another author']}
+        />
         {this.props.articleSelected ?
           <Redirect to={'/article/'+this.props.slug} />
           : <div/>

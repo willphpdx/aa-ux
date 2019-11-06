@@ -27,6 +27,9 @@
   "dependencies": {
     "@material-ui/core": "^4.5.0",
     "@material-ui/icons": "^4.5.1",
+    "@material/react-layout-grid": "^0.14.1",
+    "@material/react-material-icon": "^0.15.0",
+    "@material/react-select": "^0.15.0",
     "convert-units": "^2.3.4",
     "cors": "^2.8.5",
     "html-react-parser": "^0.9.1",
