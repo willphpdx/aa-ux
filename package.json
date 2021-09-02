@@ -33,7 +33,7 @@
     "convert-units": "^2.3.4",
     "cors": "^2.8.5",
     "html-react-parser": "^0.9.1",
-    "immer": "^5.0.0",
+    "immer": "^9.0.6",
     "marked": "^0.7.0",
     "node-fetch": "^2.6.0",
     "react": "^16.10.1",
