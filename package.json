@@ -34,7 +34,7 @@
     "cors": "^2.8.5",
     "html-react-parser": "^0.9.1",
     "immer": "^5.0.0",
-    "marked": "^0.7.0",
+    "marked": "^4.0.10",
     "node-fetch": "^2.6.0",
     "react": "^16.10.1",
     "react-dom": "^16.10.1",
