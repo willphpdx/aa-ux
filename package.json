@@ -35,7 +35,7 @@
     "html-react-parser": "^0.9.1",
     "immer": "^5.0.0",
     "marked": "^0.7.0",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^3.1.1",
     "react": "^16.10.1",
     "react-dom": "^16.10.1",
     "react-redux": "^7.1.1",
